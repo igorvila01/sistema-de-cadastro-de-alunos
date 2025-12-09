@@ -1,0 +1,13 @@
+alunos=[]
+def adicionar_aluno():
+    ...
+
+def remover_aluno():
+    ...
+
+def calcular_media():
+    ...
+
+def listar_alunos():
+    ...
+
