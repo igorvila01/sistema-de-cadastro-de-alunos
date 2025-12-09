@@ -18,3 +18,18 @@ def calcular_media():
 def listar_alunos():
     ...
 
+
+menu = """
+        [c] Cadastrar Aluno
+        [n] Adicionar Nota Aluno
+        [d] Remover Aluno
+        [m] Calcular Media Aluno 
+        [l] Listar Alunos
+        [s] Sair
+        =>"""
+
+while True:
+    menu_selecionado = input(menu)
+    
+
+    break
