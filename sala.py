@@ -30,7 +30,30 @@ menu = """
 
 while True:
     entrada = input(menu)[0].lower()
-    print(entrada)
+    
+    match entrada:
+        case 'c':
+            ...
+        
+        case 'n':
+            ...
+        
+        case 'd':
+            ...
+        
+        case 'm':
+            ...
+        
+        case 'l':
+            ...
+        
+        case 's':
+            break
 
+        case _:
+            print('Entrada Inválida! Tente Novamente!')
+            continue
 
-    break
+    
+
+    
