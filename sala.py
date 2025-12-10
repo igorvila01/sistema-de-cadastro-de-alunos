@@ -1,9 +1,12 @@
 alunos={}
 def adicionar_aluno(nome, idade, curso):
-    alunos[nome]= {'idade': idade,
+    ra = len(alunos)+1
+    alunos[ra]= {'nome' : nome,
+                   'idade': idade,
                    'curso': curso,
                    'notas': []
                    }
+    
     
 def adicionar_nota(nome, nota):
     if nome in alunos:
@@ -15,8 +18,9 @@ def remover_aluno():
 def calcular_media():
     ...
 
-def listar_alunos():
-    ...
+def listar_alunos(alunos):
+    for ra, pessoa in alunos.items():
+        print(ra, pessoa['nome'], pessoa['idade'], pessoa['curso'])
 
 
 menu = """
@@ -33,8 +37,19 @@ while True:
     
     match entrada:
         case 'c':
-            ...
-        
+            while True:
+                try:
+                    nome = input('Nome Aluno: ').upper()
+                    idade = int(input('Idade Aluno: '))
+                    curso = input('Curso: ').upper()
+
+                    adicionar_aluno(nome, idade, curso)
+                    break
+                
+                except ValueError:
+                    print('Idade Inválida, preencha novamente!')
+                    continue                        
+
         case 'n':
             ...
         
@@ -45,7 +60,7 @@ while True:
             ...
         
         case 'l':
-            ...
+            listar_alunos(alunos)
         
         case 's':
             break
