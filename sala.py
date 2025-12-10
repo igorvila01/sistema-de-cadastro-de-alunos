@@ -8,9 +8,9 @@ def adicionar_aluno(nome, idade, curso):
                    }
     
     
-def adicionar_nota(nome, nota):
-    if nome in alunos:
-        alunos[nome]['notas'].append(nota)
+def adicionar_nota(ra, nota):
+    if ra in alunos:
+        alunos[ra]['notas'].append(nota)
 
 def remover_aluno():
     ...
@@ -20,7 +20,7 @@ def calcular_media():
 
 def listar_alunos(alunos):
     for ra, pessoa in alunos.items():
-        print(ra, pessoa['nome'], pessoa['idade'], pessoa['curso'])
+        print(ra, pessoa['nome'], pessoa['idade'], pessoa['curso'], pessoa['notas'])
 
 
 menu = """
@@ -51,7 +51,31 @@ while True:
                     continue                        
 
         case 'n':
-            ...
+            listar_alunos(alunos)
+
+            print('Cadastrar Nota!')
+            while True:
+                try:
+                    ra = int(input('Digite o RA do Aluno: '))
+
+                    if ra in alunos:
+                        nota = float(input('Digite a Nota:'))
+                    else:
+                        print('Aluno nao existe!')
+                        break
+
+                    adicionar_nota(ra, nota)
+                    break
+
+                except ValueError:
+                    print('Entrada Invalida!') 
+                    opcao = input('Digite 1 para tentar novamente\n' \
+                                  'Ou qualquer coisa para menu anterior')  
+
+                    if opcao == 1:
+                        continue
+                    else:
+                        break                               
         
         case 'd':
             ...
