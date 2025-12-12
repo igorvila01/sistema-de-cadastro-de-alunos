@@ -1,6 +1,6 @@
 alunos={}
-def adicionar_aluno(nome, idade, curso):
-    ra = len(alunos)+1
+ra = 0
+def adicionar_aluno(ra, nome, idade, curso):
     alunos[ra]= {'nome' : nome,
                    'idade': idade,
                    'curso': curso,
@@ -12,10 +12,15 @@ def adicionar_nota(ra, nota):
     if ra in alunos:
         alunos[ra]['notas'].append(nota)
 
-def remover_aluno():
-    ...
+def remover_aluno(ra):
+    if ra in alunos:
+        del alunos[ra]
+        print('Aluno deletado com sucesso!')
+    else:
+        print('Ra Inexistente!')
+    
 
-def calcular_media():
+def calcular_media(ra):
     ...
 
 def listar_alunos(alunos):
@@ -43,7 +48,8 @@ while True:
                     idade = int(input('Idade Aluno: '))
                     curso = input('Curso: ').upper()
 
-                    adicionar_aluno(nome, idade, curso)
+                    ra += 1
+                    adicionar_aluno(ra, nome, idade, curso)
                     break
                 
                 except ValueError:
@@ -78,10 +84,46 @@ while True:
                         break                               
         
         case 'd':
-            ...
+            listar_alunos(alunos)
+
+            print()
+            while True:
+                try:
+                    ra = int(input('Digite o RA do Aluno: '))
+
+                    remover_aluno(ra)
+                    break
+
+                except ValueError:
+                    print('Entrada Invalida!') 
+                    opcao = input('Digite 1 para tentar novamente\n' \
+                                  'Ou qualquer coisa para menu anterior')  
+
+                    if opcao == 1:
+                        continue
+                    else:
+                        break 
         
         case 'm':
-            ...
+            listar_alunos(alunos)
+
+            print()
+            while True:
+                try:
+                    ra = int(input('Digite o RA do Aluno: '))
+
+                    calcular_media(ra)
+                    break
+
+                except ValueError:
+                    print('Entrada Invalida!') 
+                    opcao = input('Digite 1 para tentar novamente\n' \
+                                  'Ou qualquer coisa para menu anterior')  
+
+                    if opcao == 1:
+                        continue
+                    else:
+                        break 
         
         case 'l':
             listar_alunos(alunos)
