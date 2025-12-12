@@ -4,7 +4,8 @@ def adicionar_aluno(ra, nome, idade, curso):
     alunos[ra]= {'nome' : nome,
                    'idade': idade,
                    'curso': curso,
-                   'notas': []
+                   'notas': [],
+                   'media': 0.0
                    }
     
     
@@ -21,11 +22,13 @@ def remover_aluno(ra):
     
 
 def calcular_media(ra):
-    ...
+    if ra in alunos:
+        alunos[ra]['media'] = f'{sum(alunos[ra]['notas'])/len(alunos[ra]['notas']):.2f}'
+    
 
 def listar_alunos(alunos):
     for ra, pessoa in alunos.items():
-        print(ra, pessoa['nome'], pessoa['idade'], pessoa['curso'], pessoa['notas'])
+        print(ra, pessoa['nome'], pessoa['idade'], pessoa['curso'], pessoa['notas'], pessoa['media'])
 
 
 menu = """
