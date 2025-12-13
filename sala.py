@@ -1,5 +1,11 @@
+import os
+
 alunos={}
-ra = 0
+ra_cont = 0
+
+def limpa_tela():
+    os.system('cls')
+
 def adicionar_aluno(ra, nome, idade, curso):
     alunos[ra]= {'nome' : nome,
                    'idade': idade,
@@ -8,10 +14,14 @@ def adicionar_aluno(ra, nome, idade, curso):
                    'media': 0.0
                    }
     
+    print('Aluno Cadastrado com Sucesso!')
+    
     
 def adicionar_nota(ra, nota):
     if ra in alunos:
         alunos[ra]['notas'].append(nota)
+
+    print(f'Nota do aluno {alunos[ra]['nome']} cadastrada com sucesso!')
 
 def remover_aluno(ra):
     if ra in alunos:
@@ -22,13 +32,16 @@ def remover_aluno(ra):
     
 
 def calcular_media(ra):
-    if ra in alunos:
+    if ra in alunos and len(alunos[ra]['notas']) > 0:
         alunos[ra]['media'] = f'{sum(alunos[ra]['notas'])/len(alunos[ra]['notas']):.2f}'
-    
+    else:
+        alunos[ra]['media'] = 0.0
 
 def listar_alunos(alunos):
+    print('\n---------- Lista de Alunos -------------')
     for ra, pessoa in alunos.items():
-        print(ra, pessoa['nome'], pessoa['idade'], pessoa['curso'], pessoa['notas'], pessoa['media'])
+        print(f'{ra} | {pessoa['nome']} | {pessoa['idade']} anos | {pessoa['curso']} | {pessoa['notas']} | {pessoa['media']}')
+    print('----------------------------------------')
 
 
 menu = """
@@ -50,9 +63,10 @@ while True:
                     nome = input('Nome Aluno: ').upper()
                     idade = int(input('Idade Aluno: '))
                     curso = input('Curso: ').upper()
+                    ra_cont += 1
 
-                    ra += 1
-                    adicionar_aluno(ra, nome, idade, curso)
+                    limpa_tela()
+                    adicionar_aluno(ra_cont, nome, idade, curso)                    
                     break
                 
                 except ValueError:
@@ -60,20 +74,22 @@ while True:
                     continue                        
 
         case 'n':
+            limpa_tela()
             listar_alunos(alunos)
 
             print('Cadastrar Nota!')
             while True:
                 try:
-                    ra = int(input('Digite o RA do Aluno: '))
+                    ra_entrada = int(input('Digite o RA do Aluno: '))
 
-                    if ra in alunos:
+                    if ra_entrada in alunos:
                         nota = float(input('Digite a Nota:'))
                     else:
                         print('Aluno nao existe!')
                         break
-
-                    adicionar_nota(ra, nota)
+                    
+                    limpa_tela()
+                    adicionar_nota(ra_entrada, nota)
                     break
 
                 except ValueError:
@@ -92,9 +108,9 @@ while True:
             print()
             while True:
                 try:
-                    ra = int(input('Digite o RA do Aluno: '))
+                    ra_entrada = int(input('Digite o RA do Aluno: '))
 
-                    remover_aluno(ra)
+                    remover_aluno(ra_entrada)
                     break
 
                 except ValueError:
@@ -113,9 +129,9 @@ while True:
             print()
             while True:
                 try:
-                    ra = int(input('Digite o RA do Aluno: '))
+                    ra_entrada = int(input('Digite o RA do Aluno: '))
 
-                    calcular_media(ra)
+                    calcular_media(ra_entrada)
                     break
 
                 except ValueError:
