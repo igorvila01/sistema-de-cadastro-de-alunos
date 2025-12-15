@@ -24,11 +24,11 @@ def adicionar_nota(ra, nota):
     if ra in alunos:
         alunos[ra]['notas'].append(nota)
 
-    print(f'Nota do aluno {alunos[ra]['nome']} cadastrada com sucesso!')
+    print(f"Nota do aluno {alunos[ra]['nome']} cadastrada com sucesso!")
 
 def remover_aluno(ra):
     if ra in alunos:
-        print(f'Aluno {alunos[ra]['nome']} deletado com sucesso!')
+        print(f"Aluno {alunos[ra]['nome']} deletado com sucesso!")
         del alunos[ra]        
     else:
         print('Ra Inexistente!')
@@ -36,14 +36,14 @@ def remover_aluno(ra):
 
 def calcular_media(ra):
     if ra in alunos and len(alunos[ra]['notas']) > 0:
-        alunos[ra]['media'] = f'{sum(alunos[ra]['notas'])/len(alunos[ra]['notas']):.2f}'
+        alunos[ra]['media'] = sum(alunos[ra]['notas'])/len(alunos[ra]['notas'])
     else:
         alunos[ra]['media'] = 0.0
 
 def listar_alunos(alunos):
     print('\n---------- Lista de Alunos -------------')
     for ra, pessoa in alunos.items():
-        print(f'{ra} | {pessoa['nome']} | {pessoa['idade']} anos | {pessoa['curso']} | {pessoa['notas']} | {pessoa['media']}')
+        print(f"{ra} | {pessoa['nome']} | {pessoa['idade']} anos | {pessoa['curso']} | {pessoa['notas']} | {pessoa['media']:.2f}")
     print('----------------------------------------')
 
 
@@ -57,7 +57,12 @@ menu = """
 =>"""
 
 while True:
-    entrada = input(menu)[0].lower()
+    entrada = input(menu).strip().lower()
+
+    if not entrada:
+        continue
+
+    entrada = entrada[0]
     
     match entrada:
         case 'c':
@@ -86,7 +91,14 @@ while True:
                     ra_entrada = int(input('Digite o RA do Aluno: '))
 
                     if ra_entrada in alunos:
-                        nota = float(input('Digite a Nota:'))
+                        while True:
+                            nota = float(input('Digite a Nota:'))
+
+                            if nota < 0 or nota >10:
+                                print('Digite uma nota de 0 a 10!')
+                                continue
+
+                            break
                     else:
                         print('Aluno nao existe!')
                         break
@@ -100,7 +112,7 @@ while True:
                     opcao = input('Digite 1 para tentar novamente\n' \
                                   'Ou qualquer coisa para menu anterior')  
 
-                    if opcao == 1:
+                    if opcao == "1":
                         continue
                     else:
                         break                               
@@ -123,7 +135,7 @@ while True:
                     opcao = input('Digite 1 para tentar novamente\n' \
                                   'Ou qualquer coisa para menu anterior')  
 
-                    if opcao == 1:
+                    if opcao == "1":
                         continue
                     else:
                         break 
@@ -146,7 +158,7 @@ while True:
                     opcao = input('Digite 1 para tentar novamente\n' \
                                   'Ou qualquer coisa para menu anterior')  
 
-                    if opcao == 1:
+                    if opcao == "1":
                         continue
                     else:
                         break 
