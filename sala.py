@@ -4,7 +4,10 @@ alunos={}
 ra_cont = 0
 
 def limpa_tela():
-    os.system('cls')
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
 
 def adicionar_aluno(ra, nome, idade, curso):
     alunos[ra]= {'nome' : nome,
@@ -25,8 +28,8 @@ def adicionar_nota(ra, nota):
 
 def remover_aluno(ra):
     if ra in alunos:
-        del alunos[ra]
-        print('Aluno deletado com sucesso!')
+        print(f'Aluno {alunos[ra]['nome']} deletado com sucesso!')
+        del alunos[ra]        
     else:
         print('Ra Inexistente!')
     
@@ -103,6 +106,7 @@ while True:
                         break                               
         
         case 'd':
+            limpa_tela()
             listar_alunos(alunos)
 
             print()
@@ -110,6 +114,7 @@ while True:
                 try:
                     ra_entrada = int(input('Digite o RA do Aluno: '))
 
+                    limpa_tela()
                     remover_aluno(ra_entrada)
                     break
 
@@ -124,6 +129,7 @@ while True:
                         break 
         
         case 'm':
+            limpa_tela()
             listar_alunos(alunos)
 
             print()
@@ -131,6 +137,7 @@ while True:
                 try:
                     ra_entrada = int(input('Digite o RA do Aluno: '))
 
+                    limpa_tela()
                     calcular_media(ra_entrada)
                     break
 
